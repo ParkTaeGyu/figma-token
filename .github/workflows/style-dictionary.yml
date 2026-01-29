@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "tokens.js"
+      - "token.js"
       - "style-dictionary.config.js"
       - "package.json"
       - "package-lock.json"
