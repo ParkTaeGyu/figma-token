@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echoddd  "scripts": {
-    "build:tokens": "style-dictionary build --config token.json"
+    "build:tokens": "style-dictionary build --config token.config.js"
   },
   "devDependencies": {
     "style-dictionary": "^4.3.0"
