@@ -5,9 +5,10 @@ on:
     branches:
       - main
     paths:
-      - "tokens/**"
+      - "tokens.js"
       - "style-dictionary.config.js"
       - "package.json"
+      - "package-lock.json"
 
 jobs:
   build-tokens:
