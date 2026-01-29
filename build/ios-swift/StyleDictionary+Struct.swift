@@ -9,5 +9,5 @@
 import UIKit
 
 internal struct StyleDictionaryStruct {
-    internal static let sementicFilledButtonBg = UIColor(red: 0.729, green: 0.082, blue: 0.090, alpha: 1)
+    internal static let sementicFilledButtonBg = UIColor(red: 0.729, green: 0.082, blue: 0.082, alpha: 1)
 }

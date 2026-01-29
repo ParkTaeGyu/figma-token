@@ -9,5 +9,5 @@
 import UIKit
 
 public class StyleDictionaryClass {
-    public static let sementicFilledButtonBg = UIColor(red: 0.729, green: 0.082, blue: 0.090, alpha: 1)
+    public static let sementicFilledButtonBg = UIColor(red: 0.729, green: 0.082, blue: 0.082, alpha: 1)
 }
