@@ -5,6 +5,9 @@ on:
     tags:
       - "v*"
 
+permissions:
+  contents: write   # 🔥 이게 핵심
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -19,4 +22,3 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           generate_release_notes: true
-
