@@ -1,0 +1,45 @@
+name: Build Design Tokens
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "tokens/**"
+      - "style-dictionary.config.js"
+      - "package.json"
+
+jobs:
+  build-tokens:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # 🔥 커밋을 다시 만들기 위해 필요
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build tokens
+        run: npm run build:tokens
+
+      - name: Commit build results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add build
+            git commit -m "chore(tokens): build design tokens"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
