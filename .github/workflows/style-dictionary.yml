@@ -5,10 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "token.js"
       - "token.json"
-      - "package.json"
-      - "package-lock.json"
 
 jobs:
   build-tokens:
@@ -29,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Build tokens
-        run: npm run build:tokens
+        run: npm run build:tokens:debug
 
       - name: Commit build results
         run: |
