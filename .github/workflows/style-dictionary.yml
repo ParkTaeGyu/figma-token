@@ -1,4 +1,4 @@
-name: Build Design Tokens
+name: Build & Release Design Tokens
 
 on:
   push:
@@ -8,18 +8,18 @@ on:
       - "token.json"
 
 permissions:
-  contents: write   # 🔥 명시적으로 write
+  contents: write
 
 jobs:
-  build-tokens:
+  build-release:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GH_PAT }}   # 🔥 PAT 사용
+          token: ${{ secrets.GH_PAT }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -27,11 +27,11 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
+      - name: Install deps
         run: npm ci
 
       - name: Build tokens
-        run: npm run build:tokens:debug
+        run: npm run build:tokens
 
       - name: Commit build results
         run: |
@@ -41,7 +41,21 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             git add build
             git commit -m "chore(tokens): build design tokens"
-            git push https://${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git
-          else
-            echo "No changes to commit"
           fi
+
+      - name: Bump version & tag
+        run: |
+          npm version patch -m "chore(release): %s"
+          git push --follow-tags https://${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            ### 🎨 Design Tokens Updated
+            - token.json 변경 반영
+            - iOS / Android / Web 토큰 자동 생성
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
