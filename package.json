@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:tokens": "style-dictionary build --config token.config.js",
-    "build:tokens:debug": "style-dictionary build --config token.config.js --verbose"
+    "build:tokens:debug": "node scripts/prebuild-tokens.js && style-dictionary build --config token.config.js --verbose"
   },
   "devDependencies": {
     "style-dictionary": "^4.3.0"
