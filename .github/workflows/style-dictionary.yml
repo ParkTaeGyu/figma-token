@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "token.js"
-      - "style-dictionary.config.js"
+      - "token.json"
       - "package.json"
       - "package-lock.json"
 
