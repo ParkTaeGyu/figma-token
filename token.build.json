@@ -1,0 +1,74 @@
+{
+  "colors": {
+    "gray": {
+      "100": {
+        "value": "#f7fafc",
+        "type": "color"
+      },
+      "200": {
+        "value": "#edf2f6",
+        "type": "color"
+      },
+      "300": {
+        "value": "#0e213a",
+        "type": "color"
+      },
+      "400": {
+        "value": "#cbd5e0",
+        "type": "color"
+      },
+      "500": {
+        "value": "#ba1515",
+        "type": "color"
+      },
+      "700": {
+        "value": "#d3c3c3",
+        "type": "color"
+      },
+      "800": {
+        "value": "#a42e2e",
+        "type": "color"
+      },
+      "900": {
+        "value": "#f7fafc",
+        "type": "color"
+      }
+    }
+  },
+  "scheme": {
+    "red": {
+      "on-surface": {
+        "disabled": {
+          "value": "{colors.gray.100}",
+          "type": "color"
+        },
+        "enabled": {
+          "value": "{colors.gray.900}",
+          "type": "color"
+        },
+        "major": {
+          "value": "{colors.gray.300}",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "sementic": {
+    "filled": {
+      "button": {
+        "bg": {
+          "value": "{colors.gray.500}",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "$themes": [],
+  "$metadata": {
+    "tokenSetOrder": [
+      "primitive",
+      "scheme",
+      "sementic"
+    ]
+  }
+}

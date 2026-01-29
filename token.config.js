@@ -1,7 +1,7 @@
 const StyleDictionary = require("style-dictionary");
 
 module.exports = {
-  "source": ["token.json"],
+  "source": ["token.build.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
