@@ -4,16 +4,16 @@
   Do not edit directly, this file was auto-generated.
 -->
 <resources>
-  <color name="colors_gray_100">#fff7fafc</color>
-  <color name="colors_gray_200">#ff0d5088</color>
+  <color name="colors_gray_100">#ff0099ff</color>
+  <color name="colors_gray_200">#ff0d5087</color>
   <color name="colors_gray_300">#ff0e213a</color>
-  <color name="colors_gray_400">#ffcbd5e0</color>
-  <color name="colors_gray_500">#ffba1517</color>
-  <color name="colors_gray_700">#ffd3c3c3</color>
-  <color name="colors_gray_800">#ffa42e2e</color>
-  <color name="colors_gray_900">#ff154262</color>
-  <color name="scheme_red_on_surface_disabled">#fff7fafc</color>
-  <color name="scheme_red_on_surface_enabled">#ff154262</color>
-  <color name="scheme_red_on_surface_major">#ff0e213a</color>
-  <color name="sementic_filled_button_bg">#ffba1517</color>
+  <color name="colors_gray_400">#ff007bff</color>
+  <color name="colors_gray_500">#ffffffff</color>
+  <color name="colors_gray_700">#ff000000</color>
+  <color name="colors_gray_800">#ffffd3d3</color>
+  <color name="colors_gray_900">#fffff4f4</color>
+  <color name="red_on_surface_disabled">#fffff4f4</color>
+  <color name="red_on_surface_enabled">#fffff4f4</color>
+  <color name="red_on_surface_major">#ff0e213a</color>
+  <color name="sementic_filled_button_bg">#fffff4f4</color>
 </resources>
