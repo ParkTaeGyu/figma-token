@@ -6,7 +6,7 @@
 <resources>
   <color name="colors_gray_100">#ff0099ff</color>
   <color name="colors_gray_200">#ff0d5087</color>
-  <color name="colors_gray_300">#ff0e213a</color>
+  <color name="colors_gray_300">#ff000000</color>
   <color name="colors_gray_400">#ff007bff</color>
   <color name="colors_gray_500">#ffffffff</color>
   <color name="colors_gray_700">#ff000000</color>
@@ -14,6 +14,6 @@
   <color name="colors_gray_900">#ffc30000</color>
   <color name="red_on_surface_disabled">#ffc30000</color>
   <color name="red_on_surface_enabled">#ffc30000</color>
-  <color name="red_on_surface_major">#ff0e213a</color>
+  <color name="red_on_surface_major">#ff000000</color>
   <color name="sementic_filled_button_bg">#ffc30000</color>
 </resources>
