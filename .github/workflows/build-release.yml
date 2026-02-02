@@ -29,9 +29,11 @@ jobs:
       
       - name: Install deps
         run: npm ci
-      
-      - name: Build tokens
-        run: npm run build:tokens
+
+      - name: Clean and build
+        run: |
+          rm -rf build/
+          npm run build:tokens
       
       - name: Check for build changes
         id: check_changes
@@ -54,16 +56,22 @@ jobs:
           
           git commit -m "chore: build design tokens"
           
-          # 버전 업데이트
-          npm version patch -m "chore: release v%s"
+          # 버전 업데이트 (태그 충돌 방지)
+          npm version patch --no-git-tag-version
+          NEW_VERSION=$(node -p "require('./package.json').version")
           
-          # 태그 저장
-          NEW_TAG=$(git describe --tags --abbrev=0)
+          git add package.json package-lock.json
+          git commit -m "chore: release v${NEW_VERSION}"
+          
+          # 태그 생성
+          NEW_TAG="v${NEW_VERSION}"
+          git tag -f $NEW_TAG -m "Release $NEW_TAG"
+          
           echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
           
           # 푸시 (커밋 2개 + 태그)
           git push https://${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git HEAD:main
-          git push https://${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git $NEW_TAG
+          git push https://${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git $NEW_TAG --force
       
       - name: Create GitHub Release
         if: steps.check_changes.outputs.changed == 'true'
