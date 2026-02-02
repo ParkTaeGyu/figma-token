@@ -5,15 +5,15 @@
 -->
 <resources>
   <color name="colors_gray_100">#fff7fafc</color>
-  <color name="colors_gray_200">#ffedf2f6</color>
+  <color name="colors_gray_200">#ff0d5088</color>
   <color name="colors_gray_300">#ff0e213a</color>
   <color name="colors_gray_400">#ffcbd5e0</color>
-  <color name="colors_gray_500">#ffba1515</color>
+  <color name="colors_gray_500">#ffba1517</color>
   <color name="colors_gray_700">#ffd3c3c3</color>
   <color name="colors_gray_800">#ffa42e2e</color>
-  <color name="colors_gray_900">#fff7fafc</color>
+  <color name="colors_gray_900">#ff154262</color>
   <color name="scheme_red_on_surface_disabled">#fff7fafc</color>
-  <color name="scheme_red_on_surface_enabled">#fff7fafc</color>
+  <color name="scheme_red_on_surface_enabled">#ff154262</color>
   <color name="scheme_red_on_surface_major">#ff0e213a</color>
-  <color name="sementic_filled_button_bg">#ffba1515</color>
+  <color name="sementic_filled_button_bg">#ffba1517</color>
 </resources>
