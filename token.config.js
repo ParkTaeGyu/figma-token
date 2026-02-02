@@ -1,175 +1,55 @@
 const StyleDictionary = require("style-dictionary");
+const iosColorSetAction = require("./actions/ios-color-set.js");
 
 module.exports = {
-  "source": ["token.build.json"],
-  "platforms": {
-    "scss": {
-      "transformGroup": "scss",
-      "buildPath": "build/scss/",
-      "files": [
-        {
-          "destination": "_variables.scss",
-          "format": "scss/variables"
-        }
-      ]
-    },
-    "android": {
-      "transformGroup": "android",
-      "buildPath": "build/android/",
-      "files": [
-        {
-          "destination": "font_dimens.xml",
-          "format": "android/fontDimens"
-        },
-        {
-          "destination": "colors.xml",
-          "format": "android/colors"
-        }
-      ]
-    },
-    "compose": {
-      "transformGroup": "compose",
-      "buildPath": "build/compose/",
-      "files": [
-        {
-          "destination": "StyleDictionaryColor.kt",
-          "format": "compose/object",
-          "options": {
-            "className": "StyleDictionaryColor",
-            "packageName": "StyleDictionaryColor"
-          },
-          "filter": {
-            "type": "color"
-          }
-        },
-        {
-          "destination": "StyleDictionarySize.kt",
-          "format": "compose/object",
-          "options": {
-            "className": "StyleDictionarySize",
-            "packageName": "StyleDictionarySize",
-            "type": "float"
-          },
-          "filter": {
-            "type": "fontSize"
-          }
-        }
-      ]
-    },
-    "ios": {
-      "transformGroup": "ios",
-      "buildPath": "build/ios/",
-      "files": [
-        {
-          "destination": "StyleDictionaryColor.h",
-          "format": "ios/colors.h",
-          "options": {
-            "className": "StyleDictionaryColor",
-            "type": "StyleDictionaryColorName"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic' && token.type === 'color';
-          }
-        },
-        {
-          "destination": "StyleDictionaryColor.m",
-          "format": "ios/colors.m",
-          "options": {
-            "className": "StyleDictionaryColor",
-            "type": "StyleDictionaryColorName"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic' && token.type === 'color';
-          }
-        },
-        {
-          "destination": "StyleDictionarySize.h",
-          "format": "ios/static.h",
-          "options": {
-            "className": "StyleDictionarySize",
-            "type": "float"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic' && token.type === 'fontSize';
-          }
-        },
-        {
-          "destination": "StyleDictionarySize.m",
-          "format": "ios/static.m",
-          "options": {
-            "className": "StyleDictionarySize",
-            "type": "float"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic' && token.type === 'fontSize';
-          }
-        }
-      ]
-    },
-    "ios-swift": {
-      "transformGroup": "ios-swift",
-      "buildPath": "build/ios-swift/",
-      "files": [
-        {
-          "destination": "StyleDictionary+Class.swift",
-          "format": "ios-swift/class.swift",
-          "options": {
-            "className": "StyleDictionaryClass"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic';
-          }
-        },
-        {
-          "destination": "StyleDictionary+Enum.swift",
-          "format": "ios-swift/enum.swift",
-          "options": {
-            "className": "StyleDictionaryEnum"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic';
-          }
-        },
-        {
-          "destination": "StyleDictionary+Struct.swift",
-          "format": "ios-swift/any.swift",
-          "options": {
-            "className": "StyleDictionaryStruct",
-            "imports": "SwiftUI",
-            "objectType": "struct",
-            "accessControl": "internal"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic';
-          }
-        }
-      ]
-    },
-    "ios-swift-separate-enums": {
-      "transformGroup": "ios-swift-separate",
-      "buildPath": "build/ios-swift/",
-      "files": [
-        {
-          "destination": "StyleDictionaryColor.swift",
-          "format": "ios-swift/enum.swift",
-          "options": {
-            "className": "StyleDictionaryColor"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic' && token.type === 'color';
-          }
-        },
-        {
-          "destination": "StyleDictionarySize.swift",
-          "format": "ios-swift/enum.swift",
-          "options": {
-            "className": "StyleDictionarySize"
-          },
-          "filter": function(token) {
-            return token.path && token.path[0] === 'sementic' && token.type === 'fontSize';
-          }
-        }
-      ]
+  source: ["token.build.json"],
+    // ✅ v4: hooks 사용
+  hooks: {
+    actions: {
+      "ios/generate-colorsets": iosColorSetAction
     }
+  },
+  platforms: {
+    scss: {
+      transformGroup: "scss",
+      buildPath: "build/scss/",
+      files: [
+        { destination: "_variables.scss", format: "scss/variables" }
+      ]
+    },
+    
+    android: {
+      transformGroup: "android",
+      buildPath: "build/android/",
+      files: [
+        { destination: "font_dimens.xml", format: "android/fontDimens" },
+        { destination: "colors.xml", format: "android/colors" }
+      ]
+    },
+    
+    compose: {
+      transformGroup: "compose",
+      buildPath: "build/compose/",
+      files: [
+        {
+          destination: "StyleDictionaryColor.kt",
+          format: "compose/object",
+          options: {
+            className: "StyleDictionaryColor",
+            packageName: "StyleDictionaryColor"
+          },
+          filter: token => token.type === "color"
+        }
+      ]
+    },
+    
+    // ✅ iOS Color Sets - Action 사용
+    "ios-color-set": {
+      transformGroup: "css",
+      buildPath: "build/ios/Assets.xcassets/",
+      files: [], // ✅ 빈 배열 추가
+      actions: ["ios/generate-colorsets"], // format 대신 actions 사용
+      // files 배열 제거 - action이 직접 파일 생성
+    },
   }
 };
