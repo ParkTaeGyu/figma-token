@@ -26,7 +26,7 @@ const raw = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
 
 const output = {
   ...raw.primitive,
-  scheme: raw.scheme,
+  ...raw.scheme,
   sementic: raw.sementic,
   $themes: raw.$themes,
   $metadata: raw.$metadata,

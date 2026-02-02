@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "generate:tokens": "node scripts/prebuild-token.js",
-    "build:tokens": "style-dictionary build --config token.config.js",
+    "build:tokens": "npm run generate:tokens && style-dictionary build --config token.config.js",
     "build:tokens:debug": "npm run generate:tokens && npm run build:tokens -- --verbose"
   },
   "devDependencies": {
