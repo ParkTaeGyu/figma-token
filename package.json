@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate:tokens": "node scripts/prebuild-token.js",
     "build:tokens": "style-dictionary build --config token.config.js",
-    "build:tokens:debug": "node scripts/prebuild-token.js && style-dictionary build --config token.config.js --verbose"
+    "build:tokens:debug": "npm run generate:tokens && npm run build:tokens -- --verbose"
   },
   "devDependencies": {
     "style-dictionary": "^4.3.0"
