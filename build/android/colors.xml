@@ -11,9 +11,9 @@
   <color name="colors_gray_500">#ffffffff</color>
   <color name="colors_gray_700">#ff000000</color>
   <color name="colors_gray_800">#ffffd3d3</color>
-  <color name="colors_gray_900">#fffff4f4</color>
-  <color name="red_on_surface_disabled">#fffff4f4</color>
-  <color name="red_on_surface_enabled">#fffff4f4</color>
+  <color name="colors_gray_900">#ffc30000</color>
+  <color name="red_on_surface_disabled">#ffc30000</color>
+  <color name="red_on_surface_enabled">#ffc30000</color>
   <color name="red_on_surface_major">#ff0e213a</color>
-  <color name="sementic_filled_button_bg">#fffff4f4</color>
+  <color name="sementic_filled_button_bg">#ffc30000</color>
 </resources>

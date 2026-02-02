@@ -17,9 +17,9 @@ object StyleDictionaryColor {
   val colorsGray500 = Color(0xffffffff)
   val colorsGray700 = Color(0xff000000)
   val colorsGray800 = Color(0xffffd3d3)
-  val colorsGray900 = Color(0xfffff4f4)
-  val redOnSurfaceDisabled = Color(0xfffff4f4)
-  val redOnSurfaceEnabled = Color(0xfffff4f4)
+  val colorsGray900 = Color(0xffc30000)
+  val redOnSurfaceDisabled = Color(0xffc30000)
+  val redOnSurfaceEnabled = Color(0xffc30000)
   val redOnSurfaceMajor = Color(0xff0e213a)
-  val sementicFilledButtonBg = Color(0xfffff4f4)
+  val sementicFilledButtonBg = Color(0xffc30000)
 }
