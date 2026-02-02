@@ -1,0 +1,88 @@
+name: Build & Release Design Tokens
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "token.json"
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      
+      - name: Install deps
+        run: npm ci
+      
+      - name: Build tokens
+        run: npm run build:tokens
+      
+      - name: Check for build changes
+        id: check_changes
+        run: |
+          git add build
+          
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No build changes detected"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Build changes detected"
+          fi
+      
+      - name: Commit and push build
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git commit -m "chore: build design tokens"
+          
+          # 버전 업데이트
+          npm version patch -m "chore: release v%s"
+          
+          # 태그 저장
+          NEW_TAG=$(git describe --tags --abbrev=0)
+          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+          
+          # 푸시 (커밋 2개 + 태그)
+          git push https://${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git HEAD:main
+          git push https://${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git $NEW_TAG
+      
+      - name: Create GitHub Release
+        if: steps.check_changes.outputs.changed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.NEW_TAG }}
+          name: Release ${{ env.NEW_TAG }}
+          body: |
+            ### 🎨 Design Tokens Updated
+            
+            **Changes:**
+            - token.json 변경 반영
+            - Design tokens 자동 빌드
+            
+            **Generated Files:**
+            - 🍎 iOS Color Sets (`build/ios/`)
+            - 🤖 Android XML (`build/android/`)
+            - 📦 SCSS Variables (`build/scss/`)
+            - ⚛️ React Components (`build/compose/`)
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
